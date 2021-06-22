@@ -1,6 +1,4 @@
 <template>
-  {{ array }}
-  {{ highlight }}
   <div class="array-container">
     <div
       class="array-bar"
@@ -8,7 +6,8 @@
       v-bind:key="index"
       :style="changeBackground(index, value)"
     ></div>
-
+  </div>
+  <div>
     <button style="padding-left: 5px" @click="quickSortFunction">Sort</button>
   </div>
 </template>

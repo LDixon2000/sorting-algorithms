@@ -1,36 +1,41 @@
 <template>
-  <div class="home"></div>
-  {{ animationSpeed }}
-  <MergeSort
-    v-bind:array="array"
-    v-bind:highlight="highlight"
-    v-bind:animationSpeed="animationSpeed"
-    v-if="sortingAlgo === 'merge'"
-  />
-  <QuickSort
-    v-bind:array="array"
-    v-bind:highlight="highlight"
-    v-bind:animationSpeed="animationSpeed"
-    v-if="sortingAlgo === 'quick'"
-  />
-  <BubbleSort
+  <div class="nav d-flex justify-content-center">
+    <button class="btn">Reset Array</button>
+    <button
+      class="btn btn-primary"
+      style="margin-left: 5px"
+      @click="sortingAlgo = 'merge'"
+    >
+      Merge Sort
+    </button>
+    <button style="margin-left: 5px" @click="sortingAlgo = 'quick'">
+      Quick Sort
+    </button>
+  </div>
+  <div class="body">
+    <MergeSort
+      v-bind:array="array"
+      v-bind:highlight="highlight"
+      v-bind:animationSpeed="animationSpeed"
+      v-if="sortingAlgo === 'merge'"
+    />
+    <QuickSort
+      v-bind:array="array"
+      v-bind:highlight="highlight"
+      v-bind:animationSpeed="animationSpeed"
+      v-if="sortingAlgo === 'quick'"
+    />
+    <!-- <BubbleSort
     v-bind:array="array"
     v-bind:highlight="highlight"
     v-bind:animationSpeed="animationSpeed"
     v-if="sortingAlgo === 'bubble'"
-  />
-  <div>
-    <button @click="resetArray">Generate New Array</button>
-  </div>
-  <button style="margin-left: 5px" @click="sortingAlgo = 'merge'">
-    Merge Sort
-  </button>
-  <button style="margin-left: 5px" @click="sortingAlgo = 'quick'">
-    Quick Sort
-  </button>
-  <button style="margin-left: 5px" @click="sortingAlgo = 'bubble'">
+  /> -->
+
+    <!-- <button style="margin-left: 5px" @click="sortingAlgo = 'bubble'">
     Bubble Sort
-  </button>
+  </button> -->
+  </div>
 </template>
 
 <script lang="ts">
@@ -45,7 +50,7 @@ export default defineComponent({
   components: {
     MergeSort,
     QuickSort,
-    BubbleSort,
+    //BubbleSort,
   },
   setup() {
     const animationSpeed: number[] = reactive([30]);
@@ -74,8 +79,16 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
+.nav {
+  height: 50px;
+  width: auto;
+  background: pink;
+}
+
 .array-container {
   margin: auto auto;
+  display: flex;
+  justify-content: center;
 }
 
 .array-bar {

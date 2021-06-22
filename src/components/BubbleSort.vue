@@ -1,15 +1,19 @@
 <template>
-  {{ array }}
-  {{ highlight }}
-  <div class="array-container">
-    <div
-      class="array-bar"
-      v-for="(value, index) in array"
-      v-bind:key="index"
-      :style="changeBackground(index, value)"
-    ></div>
+  <div class="row">
+    <div class="array-container col">
+      <div
+        class="array-bar"
+        v-for="(value, index) in array"
+        v-bind:key="index"
+        :style="changeBackground(index, value)"
+      ></div>
 
-    <button style="padding-left: 5px" @click="quickSortFunction">Sort</button>
+      <div class="col">
+        <button style="padding-left: 5px" @click="quickSortFunction">
+          Sort
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 

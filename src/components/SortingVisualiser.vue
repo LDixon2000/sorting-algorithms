@@ -1,6 +1,4 @@
 <template>
-  {{ animationSpeed }}
-  {{ sorting }}
   <div class="array-container">
     <div
       class="array-bar"
@@ -9,7 +7,6 @@
       :style="changeBackground(index, value)"
     ></div>
   </div>
-  {{ array }}
   <div>
     <button style="padding-left: 5px" @click="mergeSortFunction">
       Merge Sort
@@ -64,7 +61,7 @@ export default defineComponent({
       } else if (highlightVal[0] == index) {
         return "background: royalblue; height:" + value + "px;";
       } else if (highlightVal[1] == index && highlightVal[2] == -1) {
-        return "background: crimson; height:" + value + "px;";
+        return "background: crimson; height:" + value + "px;" + "flex";
       } else return "background: cadetblue; height:" + value + "px;";
       //return "height:" + value + "px;";
     }
@@ -82,14 +79,4 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.array-container {
-  margin: auto auto;
-}
-
-.array-bar {
-  width: 10px;
-  background-color: darkgrey;
-  display: inline-block;
-  margin: 0 1px;
-}
 </style>
