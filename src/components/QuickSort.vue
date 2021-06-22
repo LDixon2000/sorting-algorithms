@@ -1,5 +1,9 @@
 <template>
-  <button class="btn" style="padding-left: 5px" @click="quickSortFunction">
+  <button
+    class="btn btn-danger"
+    style="padding-left: 5px"
+    @click="quickSortFunction"
+  >
     Sort
   </button>
   <div>
