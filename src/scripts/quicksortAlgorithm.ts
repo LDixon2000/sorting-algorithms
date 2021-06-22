@@ -62,10 +62,6 @@ function addAnimation(
 
 async function animate(array: number[], highlight: number[], animations: number[][], switchArray: number[][]) {
   let counter = 0;
-  highlight[0] = -1
-  highlight[1] = -1
-  highlight[2] = -1
-  highlight[3] = -1
   for (let i = 0; i < animations.length; i++) {
     if (animations[i][3] == 1) {
       const left = animations[i][1]
@@ -79,4 +75,9 @@ async function animate(array: number[], highlight: number[], animations: number[
     }
     await (sleep(10))
   }
+
+  highlight[0] = -1
+  highlight[1] = -1
+  highlight[2] = -1
+  highlight[3] = -1
 }

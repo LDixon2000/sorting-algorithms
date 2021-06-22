@@ -13,8 +13,6 @@ async function animate(animations: number[][], array: number[], highlight: numbe
   for (let i = 0; i < animations.length; ++i) {
     //console.log(animationSpeed)
     const animationSpeed = animationSpeedArray[0]
-    if (animationSpeed > 0)
-      await sleep(animationSpeed)
     // values to be swapped
     const index = animations[i][0]
     const swapIndex = animations[i][1]
@@ -48,7 +46,6 @@ async function animate(animations: number[][], array: number[], highlight: numbe
     }
     //}, i * 15);
   }
-  animationSpeedArray[0] = 30
   highlight[0] = -1;
   highlight[1] = -1;
   highlight[2] = -1;

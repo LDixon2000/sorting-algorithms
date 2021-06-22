@@ -1,11 +1,4 @@
 <template>
-  <button
-    class="btn btn-danger"
-    style="padding-left: 5px"
-    @click="mergeSortFunction"
-  >
-    Sort
-  </button>
   <div class="array-container">
     <div
       class="array-bar"
@@ -16,9 +9,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs } from "vue";
+import { defineComponent, ref, reactive, toRefs, watch } from "vue";
 import { randomIntFromInterval } from "@/scripts/generateRandomNumber";
-import { mergeSort } from "@/scripts/sortingAlgorithms.ts";
+import { mergeSort } from "@/scripts/mergesortAlgorithm";
 export default defineComponent({
   name: "SortingVisualiser",
   props: {
@@ -29,24 +22,31 @@ export default defineComponent({
     highlight: {
       default: [],
     },
+    sort: { default: false },
+    speedSize: { default: 3 },
   },
   setup(props) {
     //const state = reactive({
     //array: [0],
     //});
-    const { array } = toRefs(props);
-    const { highlight } = toRefs(props);
-    const { animationSpeed } = toRefs(props);
+    const { array, animationSpeed, highlight, sort, speedSize } = toRefs(props);
     const highlightVal: number[] = highlight.value;
     const animationSpeedVal: number[] = animationSpeed.value;
 
+    let sortVal = sort.value;
     const sorting = ref(false);
 
+    watch(sort, async (sort, prevSort) => {
+      if (sort != prevSort) {
+        mergeSortFunction();
+        sort = false;
+      }
+    });
     async function mergeSortFunction() {
       if (!sorting.value) {
         sorting.value = true;
         console.log(sorting.value);
-        animationSpeedVal[0] = 10;
+        animationSpeedVal[0] = speedSize.value;
         await mergeSort(array.value, highlightVal, animationSpeedVal);
 
         sorting.value = false;
@@ -64,7 +64,7 @@ export default defineComponent({
         return "background: royalblue; height:" + value + "px;";
       } else if (highlightVal[1] == index && highlightVal[2] == -1) {
         return "background: crimson; height:" + value + "px;" + "flex";
-      } else return "background: cadetblue; height:" + value + "px;";
+      } else return "background: #C9D1C8; height:" + value + "px;";
       //return "height:" + value + "px;";
     }
 
