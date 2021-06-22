@@ -1,6 +1,6 @@
 <template>
   <div class="nav d-flex justify-content-center">
-    <button class="btn">Reset Array</button>
+    <button @click="resetArray" class="btn">Reset Array</button>
     <button
       class="btn btn-primary"
       style="margin-left: 5px"
