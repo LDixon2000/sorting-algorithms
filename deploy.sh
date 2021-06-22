@@ -1,12 +1,25 @@
-#!/user/bin/env stylesheet
+#!/usr/bin/env sh
 
-set -env
+# abort on errors
+set -e
 
+# build
 npm run build
+
+# navigate into the build output directory
+cd dist
+
+# if you are deploying to a custom domain
+# echo 'www.example.com' > CNAME
 
 git init
 git add -A
-git commit -m 'New Deployment'
-git push -f 
-git push -f git@github.com:LDixon2000/sorting-array-project.git main:gh-pages
+git commit -m 'deploy'
+
+# if you are deploying to https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
+
+# if you are deploying to https://<USERNAME>.github.io/<REPO>
+ git push -f git@github.com:ldixon2000/sorting-alogrithms/.git main:gh-pages
+
 cd -
