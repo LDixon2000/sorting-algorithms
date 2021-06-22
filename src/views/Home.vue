@@ -1,30 +1,36 @@
 <template>
-  <div class="nav d-flex justify-content-center">
-    <button @click="resetArray" class="btn">Reset Array</button>
-    <button
-      class="btn btn-primary"
-      style="margin-left: 5px"
-      @click="sortingAlgo = 'merge'"
-    >
-      Merge Sort
-    </button>
-    <button style="margin-left: 5px" @click="sortingAlgo = 'quick'">
-      Quick Sort
-    </button>
-  </div>
-  <div class="body">
-    <MergeSort
-      v-bind:array="array"
-      v-bind:highlight="highlight"
-      v-bind:animationSpeed="animationSpeed"
-      v-if="sortingAlgo === 'merge'"
-    />
-    <QuickSort
-      v-bind:array="array"
-      v-bind:highlight="highlight"
-      v-bind:animationSpeed="animationSpeed"
-      v-if="sortingAlgo === 'quick'"
-    />
+  <div class="body row flex justify-content-center">
+    <div class="mx-auto">
+      <div>
+        <button @click="resetArray" class="btn btn-primary">Reset Array</button>
+        <button
+          class="btn btn-primary"
+          style="margin-left: 5px"
+          @click="sortingAlgo = 'merge'"
+        >
+          Merge Sort
+        </button>
+        <button
+          class="btn btn-primary"
+          style="margin-left: 5px"
+          @click="sortingAlgo = 'quick'"
+        >
+          Quick Sort
+        </button>
+        <MergeSort
+          v-bind:array="array"
+          v-bind:highlight="highlight"
+          v-bind:animationSpeed="animationSpeed"
+          v-if="sortingAlgo === 'merge'"
+        />
+        <QuickSort
+          v-bind:array="array"
+          v-bind:highlight="highlight"
+          v-bind:animationSpeed="animationSpeed"
+          v-if="sortingAlgo === 'quick'"
+        />
+      </div>
+    </div>
     <!-- <BubbleSort
     v-bind:array="array"
     v-bind:highlight="highlight"

@@ -1,14 +1,17 @@
 <template>
-  <div class="array-container">
-    <div
-      class="array-bar"
-      v-for="(value, index) in array"
-      v-bind:key="index"
-      :style="changeBackground(index, value)"
-    ></div>
-  </div>
+  <button class="btn" style="padding-left: 5px" @click="quickSortFunction">
+    Sort
+  </button>
   <div>
-    <button style="padding-left: 5px" @click="quickSortFunction">Sort</button>
+    <div class="array-container">
+      <div
+        class="array-bar"
+        v-for="(value, index) in array"
+        v-bind:key="index"
+        :style="changeBackground(index, value)"
+      ></div>
+    </div>
+    <button @click="resetArray" class="btn">Reset Array</button>
   </div>
 </template>
 
