@@ -1,7 +1,6 @@
 <template>
-  {{ sorting }}
-  {{ animationSpeedVal }}
   <div class="array-container">
+    {{ sortingSpeed }}
     <div
       class="array-bar"
       v-for="(value, index) in array"
@@ -23,10 +22,12 @@ export default defineComponent({
       default: [],
     },
     sort: { default: false },
-    speedSize: { default: 3 },
+    sortingSpeed: { default: 3 },
   },
   setup(props) {
-    const { array, animationSpeed, highlight, sort, speedSize } = toRefs(props);
+    const { array, animationSpeed, highlight, sort, sortingSpeed } = toRefs(
+      props
+    );
     const highlightVal: number[] = highlight.value;
     const animationSpeedVal: number[] = animationSpeed.value;
 
@@ -41,10 +42,7 @@ export default defineComponent({
     async function mergeSortFunction() {
       if (!sorting.value) {
         sorting.value = true;
-        console.log(sorting.value);
-
-        animationSpeedVal[0] = 30;
-        //= speedSize.value;
+        animationSpeedVal[0] = sortingSpeed.value;
         await mergeSort(array.value, highlightVal, animationSpeedVal);
 
         sorting.value = false;
@@ -59,6 +57,7 @@ export default defineComponent({
       if (highlightVal[2] == index) {
         return "background: chartreuse; height:" + value + "px;";
       } else if (highlightVal[0] == index) {
+        //Comparison bar
         return "background: royalblue; height:" + value + "px;";
       } else if (highlightVal[1] == index && highlightVal[2] == -1) {
         return "background: crimson; height:" + value + "px;";

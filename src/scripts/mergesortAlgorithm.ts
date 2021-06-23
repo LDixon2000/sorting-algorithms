@@ -13,11 +13,12 @@ async function animate(animations: number[][], array: number[], highlight: numbe
   for (let i = 0; i < animations.length; ++i) {
     //console.log(animationSpeed)
     const animationSpeed = animationSpeedArray[0] / 3
+    if (animationSpeed > 0)
+      await sleep(animationSpeed)
     // values to be swapped
     const index = animations[i][0]
     const swapIndex = animations[i][1]
-    if (animationSpeed > 0)
-      await sleep(animationSpeed)
+
     highlight[0] = index;
     highlight[1] = swapIndex;
     highlight[2] = -1;
@@ -36,23 +37,60 @@ async function animate(animations: number[][], array: number[], highlight: numbe
     if (animationSpeed > 0)
       await sleep(animationSpeed)
 
-    highlight[1] = index + 1;
+    highlight[0] = index + 1;
     array[index] = array[swapIndex];
     highlight[2] = index;
-
     //console.log(tempArray)
     for (let x = index + 1; x <= swapIndex; x++) {
       array[x] = tempArray[counter]
       counter++
       //console.log(`counter ${counter} and tempArraylen ${tempArray.length}`)
-
-    } if (animationSpeed > 0)
-      await sleep(animationSpeed)
+    }
     //}, i * 15);
   }
   highlight[0] = -1;
   highlight[1] = -1;
   highlight[2] = -1;
+  //const animationSpeed = animationSpeedArray[0] / 3
+  //// values to be swapped
+  //const index = animations[i][0]
+  //const swapIndex = animations[i][1]
+  //if (animationSpeed > 0)
+  //await sleep(animationSpeed)
+  //highlight[0] = index;
+  //highlight[1] = swapIndex;
+  //highlight[2] = -1;
+
+  //if (animationSpeed > 0)
+  //await sleep(animationSpeed)
+
+  //const tempArray: number[] = []
+  ////From this comparison, you know that the index infront was the comparison index
+  //let counter = 0;
+  //for (let x = index; x <= swapIndex; x++) {
+  //const test = array[x]
+  //tempArray.push(test)
+  //}
+
+
+
+  //highlight[1] = index + 1;
+  //array[index] = array[swapIndex];
+  //highlight[2] = index;
+  //if (animationSpeed > 0)
+  //await sleep(animationSpeed)
+  ////console.log(tempArray)
+  //for (let x = index + 1; x <= swapIndex; x++) {
+  //array[x] = tempArray[counter]
+  //counter++
+  ////console.log(`counter ${counter} and tempArraylen ${tempArray.length}`)
+
+  //}
+  ////}, i * 15);
+  //}
+  //highlight[0] = -1;
+  //highlight[1] = -1;
+  //highlight[2] = -1;
 }
 
 

@@ -14,7 +14,7 @@ async function animate(array: number[], highlight: number[], animations: number[
   highlight[2] = -1
   highlight[3] = -1
   for (let i = 0; i < animations.length; ++i) {
-    const animationSpeed = animationSpeedArray[0] / 3
+    const animationSpeed = animationSpeedArray[0] / 2
     if (animationSpeed > 0)
       await (sleep(animationSpeed))
     if (animations[i][3] == 1) {
@@ -24,14 +24,12 @@ async function animate(array: number[], highlight: number[], animations: number[
       array[right] = switchArray[counter][1]
       counter++;
     }
-    if (animationSpeed > 0)
-      await (sleep(animationSpeed))
+
     for (let x = 0; x < animations[i].length; x++) {
       highlight[x] = animations[i][x]
     }
-
-
-
+    if (animationSpeed > 0)
+      await (sleep(animationSpeed))
   }
 
   highlight[0] = -1
@@ -63,7 +61,7 @@ function partition(array: number[], animations: number[][], switchArray: number[
     }
 
     if (left <= right) {
-      swap(array, animations, switchArray, left, right, pivot);
+      swap(array, animations, switchArray, left, right, middle);
       left++;
       right--;
     }
@@ -73,6 +71,7 @@ function partition(array: number[], animations: number[][], switchArray: number[
 
 function swap(array: number[], animations: number[][], switchArray: number[][], left: number, right: number, pivot: number) {
   addAnimation(array, animations, pivot, left, right, 1)
+  console.log(`${left} : ${pivot} : ${right} `)
   const temp = array[left]
   const temp2 = array[right]
   switchArray.push([temp2, temp])

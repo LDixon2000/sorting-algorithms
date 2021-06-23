@@ -1,6 +1,4 @@
 <template>
-  {{ sorting }}
-  {{ animationSpeedVal }}
   <div class="array-container">
     <div
       class="array-bar"
@@ -23,10 +21,12 @@ export default defineComponent({
       default: [],
     },
     sort: { default: false },
-    speedSize: { default: 3 },
+    sortingSpeed: { default: 3 },
   },
   setup(props) {
-    const { animationSpeed, array, highlight, sort, speedSize } = toRefs(props);
+    const { animationSpeed, array, highlight, sort, sortingSpeed } = toRefs(
+      props
+    );
     const highlightVal: number[] = highlight.value;
     const animationSpeedVal: number[] = animationSpeed.value;
     const sorting = ref(false);
@@ -44,9 +44,7 @@ export default defineComponent({
     async function quickSortFunction() {
       if (!sorting.value) {
         sorting.value = true;
-        console.log(sorting.value);
-        animationSpeedVal[0] = 30;
-        //speedSize.value;
+        animationSpeedVal[0] = sortingSpeed.value;
         await quicksort(array.value, highlightVal, animationSpeedVal);
 
         sorting.value = false;
