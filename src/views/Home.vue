@@ -17,9 +17,10 @@
         <label for="sortingSpeed" class="form-label">Sorting Speed</label>
         <input
           type="range"
+          style="direction: rlt"
           class="form-range"
-          min="10"
-          max="200"
+          min="-200"
+          max="-10"
           step="10"
           v-model="sortingSpeed"
           id="sortingSpeed"
@@ -122,7 +123,7 @@ export default defineComponent({
     const highlight: number[] = reactive([]);
     const sort = ref(false);
     const sortingAlgo = ref("array");
-    const sortingSpeed = ref(50);
+    const sortingSpeed = ref(-100);
 
     watch(arraySize, (arraySize, prevArraySize) => {
       if (arraySize != prevArraySize) {
@@ -135,7 +136,7 @@ export default defineComponent({
       }
     });
     async function resetArray(prevSortingAlgo?: string) {
-      if (sort.value == true) sort.value = false;
+      sort.value = false;
       animationSpeed[0] = 0;
       await sleep(sortingSpeed.value);
       animationSpeed[0] = sortingSpeed.value;

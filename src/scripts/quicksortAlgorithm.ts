@@ -14,7 +14,7 @@ async function animate(array: number[], highlight: number[], animations: number[
   highlight[2] = -1
   highlight[3] = -1
   for (let i = 0; i < animations.length; ++i) {
-    const animationSpeed = animationSpeedArray[0] / 2
+    const animationSpeed = Math.abs(animationSpeedArray[0] / 2)
     if (animationSpeed > 0)
       await (sleep(animationSpeed))
     if (animations[i][3] == 1) {

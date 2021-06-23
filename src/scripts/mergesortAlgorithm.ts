@@ -12,7 +12,7 @@ export async function mergeSort(array: number[], highlight: number[], animationS
 async function animate(animations: number[][], array: number[], highlight: number[], animationSpeedArray: number[]) {
   for (let i = 0; i < animations.length; ++i) {
     //console.log(animationSpeed)
-    const animationSpeed = animationSpeedArray[0] / 3
+    const animationSpeed = Math.abs(animationSpeedArray[0] / 3)
     if (animationSpeed > 0)
       await sleep(animationSpeed)
     // values to be swapped
