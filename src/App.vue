@@ -5,7 +5,6 @@
 </template>
 
 <style lang="scss">
-$mushroom: #f3f2e4;
 $forest: #304040;
 html,
 body {
@@ -20,6 +19,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $mushroom;
+  color: $forest;
 }
 </style>

@@ -1,7 +1,7 @@
 import {sleep} from "@/scripts/sleep.ts"
 export async function mergeSort(array: number[], highlight: number[], animationSpeedArray: number[]) {
   const animations: number[][] = [[]];
-  const auxiliaryArray: number[] = array.slice()
+  const auxiliaryArray: number[] = array.slice(0)
   merge(auxiliaryArray, animations, new Array(array.length), 0, array.length - 1)
   await animate(animations, array, highlight, animationSpeedArray)
   return
@@ -12,11 +12,12 @@ export async function mergeSort(array: number[], highlight: number[], animationS
 async function animate(animations: number[][], array: number[], highlight: number[], animationSpeedArray: number[]) {
   for (let i = 0; i < animations.length; ++i) {
     //console.log(animationSpeed)
-    const animationSpeed = animationSpeedArray[0]
+    const animationSpeed = animationSpeedArray[0] / 3
     // values to be swapped
     const index = animations[i][0]
     const swapIndex = animations[i][1]
-
+    if (animationSpeed > 0)
+      await sleep(animationSpeed)
     highlight[0] = index;
     highlight[1] = swapIndex;
     highlight[2] = -1;
@@ -38,12 +39,15 @@ async function animate(animations: number[][], array: number[], highlight: numbe
     highlight[1] = index + 1;
     array[index] = array[swapIndex];
     highlight[2] = index;
+
     //console.log(tempArray)
     for (let x = index + 1; x <= swapIndex; x++) {
       array[x] = tempArray[counter]
       counter++
       //console.log(`counter ${counter} and tempArraylen ${tempArray.length}`)
-    }
+
+    } if (animationSpeed > 0)
+      await sleep(animationSpeed)
     //}, i * 15);
   }
   highlight[0] = -1;
@@ -52,7 +56,7 @@ async function animate(animations: number[][], array: number[], highlight: numbe
 }
 
 
-export function merge(auxiliaryArray: number[], animations: number[][], temp: number[], leftStart: number, rightEnd: number) {
+function merge(auxiliaryArray: number[], animations: number[][], temp: number[], leftStart: number, rightEnd: number) {
   if (leftStart >= rightEnd) {
     return;
   }
@@ -63,7 +67,7 @@ export function merge(auxiliaryArray: number[], animations: number[][], temp: nu
 }
 
 
-export function mergeHalves(auxiliaryArray: number[], animations: number[][], temp: number[], leftStart: number, rightEnd: number) {
+function mergeHalves(auxiliaryArray: number[], animations: number[][], temp: number[], leftStart: number, rightEnd: number) {
   const leftEnd = Math.floor((rightEnd + leftStart) / 2)
   const rightStart = leftEnd + 1;
   const size = rightEnd - leftStart + 1;
@@ -85,16 +89,12 @@ export function mergeHalves(auxiliaryArray: number[], animations: number[][], te
     index++;
   }
 
-  //console.log(temp)
-  //console.log(temp)
   copyRemainder(auxiliaryArray, left, temp, index, leftEnd - left + 1)
   copyRemainder(auxiliaryArray, right, temp, index, rightEnd - right + 1)
   copyRemainder(temp, leftStart, auxiliaryArray, leftStart, size)
-  //console.log(temp)
-  //console.log(temp)
 }
 
-export function copyRemainder(from: number[], start: number, to: number[], startingIndex: number, length: number) {
+function copyRemainder(from: number[], start: number, to: number[], startingIndex: number, length: number) {
   let i: number, si: number;
   for (i = start, si = startingIndex; i < start + length; i++, si++) {
     to[si] = from[i]

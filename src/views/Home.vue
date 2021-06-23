@@ -1,7 +1,9 @@
 <template>
   <div class="home body row flex justify-content-center">
     {{ speedSize }}
-    <div class="mx-auto">
+    {{ sort }}
+    {{ sortingAlgo }}
+    <div class="">
       <div class="nav d-flex justify-content-center">
         <div class="sorting-button">
           <label for="speedSize" class="form-label">Array Size</label>
@@ -21,14 +23,34 @@
           <h4>Reset Array</h4>
         </button>
         <div class="button-splitter"></div>
-        <button class="sorting-button" @click="sortingAlgo = 'merge'">
+        <button
+          class="sorting-button"
+          @click="
+            if (sortingAlgo == 'merge') {
+              sort = true;
+            } else {
+              sortingAlgo = 'merge';
+            }
+          "
+        >
           <h4>Merge Sort</h4>
         </button>
-        <button class="sorting-button" @click="sortingAlgo = 'quick'">
+        <button
+          class="sorting-button"
+          @click="
+            if (sortingAlgo == 'quick') {
+              sort = true;
+            } else {
+              sortingAlgo = 'quick';
+            }
+          "
+        >
           <h4>Quick Sort</h4>
         </button>
         <div class="button-splitter"></div>
-        <button class="sorting-button" @click="sortArray"><h4>Sort</h4></button>
+        <!-- <button class="sorting-button" @click="sortArray">
+          <h4>Sort</h4></button
+        > -->
       </div>
       <div>
         <MergeSort
@@ -63,7 +85,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, watch } from "vue";
+import { sleep } from "@/scripts/sleep.ts";
 import { randomIntFromInterval } from "@/scripts/generateRandomNumber";
 import MergeSort from "@/components/MergeSort.vue"; // @ is an alias to /src
 import QuickSort from "@/components/QuickSort.vue";
@@ -78,28 +101,43 @@ export default defineComponent({
   },
   setup() {
     const speedSize = ref(50);
-    const animationSpeed: number[] = reactive([speedSize.value]);
+    const animationSpeed: number[] = reactive([50]);
+    const sortingAlgo = ref("");
     const array: number[] = reactive([]);
     const highlight: number[] = reactive([]);
     const sort = ref(false);
-    function sortArray() {
-      sort.value = !sort.value;
-    }
-    function resetArray() {
+
+    //function checkArray() {
+    //const tempArray = array.slice(0);
+    //tempArray.sort((a, b) => a - b);
+    //return tempArray;
+    //}
+
+    //watch(sortingAlgo, (sortingAlgo, prevSortingAlgo) => {
+    //resetArray();
+    //});
+    watch(sortingAlgo, (sortingAlgo, prevSortingAlgo) => {
+      if (sortingAlgo != prevSortingAlgo) {
+        sort.value = false;
+        resetArray();
+      }
+    });
+    async function resetArray() {
       animationSpeed[0] = 0;
+      await sleep(speedSize.value);
       array.splice(0);
       array.push(1);
       for (let i = 0; i < 99; ++i) {
         array.push(randomIntFromInterval(5, 750));
       }
+      sort.value = false;
     }
-    const sortingAlgo = ref("merge");
+
     return {
       animationSpeed,
       array,
       highlight,
       sort,
-      sortArray,
       sortingAlgo,
       speedSize,
       resetArray,
@@ -124,7 +162,7 @@ $forest: #304040;
   width: auto;
   background: #5b7065;
   border: $forest;
-  padding: 5px;
+  padding: 5px 0px;
 }
 
 .button-splitter {

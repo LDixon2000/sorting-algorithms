@@ -1,4 +1,6 @@
 <template>
+  {{ sorting }}
+  {{ animationSpeedVal }}
   <div class="array-container">
     <div
       class="array-bar"
@@ -8,13 +10,10 @@
     ></div>
   </div>
 </template>
-
 <script lang="ts">
-//:style="changeBackground(index, value)"
 import { defineComponent, ref, reactive, toRefs, watch } from "vue";
 import { quicksort } from "@/scripts/quicksortAlgorithm";
 export default defineComponent({
-  components: {},
   props: {
     array: {
       default: [1],
@@ -31,18 +30,25 @@ export default defineComponent({
     const highlightVal: number[] = highlight.value;
     const animationSpeedVal: number[] = animationSpeed.value;
     const sorting = ref(false);
-
-    watch(sort, async (sort, prevSort) => {
+    //function checkArray() {
+    //const tempArray = array.value.slice(0);
+    //tempArray.sort((a, b) => a - b);
+    //return tempArray;
+    //}
+    watch(sort, (sort, prevSort) => {
       if (sort != prevSort) {
         quickSortFunction();
-        sort = false;
       }
     });
+
     async function quickSortFunction() {
       if (!sorting.value) {
         sorting.value = true;
-        animationSpeedVal[0] = speedSize.value;
-        await quicksort(array.value, highlight.value);
+        console.log(sorting.value);
+        animationSpeedVal[0] = 30;
+        //speedSize.value;
+        await quicksort(array.value, highlightVal, animationSpeedVal);
+
         sorting.value = false;
       }
     }
@@ -59,7 +65,7 @@ export default defineComponent({
     }
     //return changeBackground
     //quicksort(array.value);
-    return { changeBackground, quickSortFunction };
+    return { animationSpeedVal, changeBackground, quickSortFunction, sorting };
   },
 });
 </script>
