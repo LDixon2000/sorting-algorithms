@@ -8,6 +8,8 @@
 $forest: #304040;
 html,
 body {
+  height: 100%;
+  width: 100%;
   background: $forest !important;
 }
 body {

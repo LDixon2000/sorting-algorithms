@@ -1,5 +1,5 @@
 <template>
-  <div class="home body row flex justify-content-center">
+  <div class="flex justify-content-center">
     <div class="nav d-flex justify-content-center">
       <div class="sorting-button">
         <label for="arraySize" class="form-label">Array Size</label>
@@ -19,7 +19,7 @@
           type="range"
           class="form-range"
           min="10"
-          max="3000"
+          max="200"
           step="10"
           v-model="sortingSpeed"
           id="sortingSpeed"
@@ -137,9 +137,7 @@ export default defineComponent({
     async function resetArray(prevSortingAlgo?: string) {
       if (sort.value == true) sort.value = false;
       animationSpeed[0] = 0;
-      if (prevSortingAlgo != "array") {
-        await sleep(sortingSpeed.value);
-      }
+      await sleep(sortingSpeed.value);
       animationSpeed[0] = sortingSpeed.value;
       array.splice(0);
       for (let i = 0; i < arraySize.value; ++i) {
@@ -177,7 +175,6 @@ $forest: #304040;
   width: auto;
   background: #5b7065;
   border: $forest;
-  padding: 5px 0px;
 }
 
 .button-splitter {
@@ -194,7 +191,6 @@ $forest: #304040;
 }
 
 .array-container {
-  margin: auto auto;
   display: flex;
   justify-content: center;
 }

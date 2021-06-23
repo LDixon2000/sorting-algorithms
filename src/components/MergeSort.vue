@@ -1,6 +1,5 @@
 <template>
   <div class="array-container">
-    {{ sortingSpeed }}
     <div
       class="array-bar"
       v-for="(value, index) in array"
@@ -55,11 +54,13 @@ export default defineComponent({
 
     function changeBackground(index: number, value: number) {
       if (highlightVal[2] == index) {
+        //Bar being inserted.
         return "background: chartreuse; height:" + value + "px;";
       } else if (highlightVal[0] == index) {
-        //Comparison bar
+        //Comparison bar.
         return "background: royalblue; height:" + value + "px;";
       } else if (highlightVal[1] == index && highlightVal[2] == -1) {
+        //Bar to be moved.
         return "background: crimson; height:" + value + "px;";
       } else return "background: #C9D1C8; height:" + value + "px;";
       //return "height:" + value + "px;";
