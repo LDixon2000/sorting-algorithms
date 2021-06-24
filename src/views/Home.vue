@@ -62,10 +62,9 @@
       >
         <h4>Quick Sort</h4>
       </button>
-      <div class="button-splitter"></div>
-      <!-- <button class="sorting-button" @click="sortArray">
-          <h4>Sort</h4></button
-        > -->
+      <!-- <div class="button-splitter"></div>
+      <button class="sorting-button" @click="sortArray">
+          <h4>Sort</h4></button> -->
     </div>
     <div>
       <Array v-bind:array="array" v-if="sortingAlgo === 'array'" />
@@ -123,22 +122,26 @@ export default defineComponent({
     const highlight: number[] = reactive([]);
     const sort = ref(false);
     const sortingAlgo = ref("array");
-    const sortingSpeed = ref(-100);
+    const sortingSpeed = ref(50);
 
     watch(arraySize, (arraySize, prevArraySize) => {
       if (arraySize != prevArraySize) {
+        sort.value = false;
         resetArray();
       }
     });
     watch(sortingAlgo, (sortingAlgo, prevSortingAlgo) => {
       if (sortingAlgo != prevSortingAlgo) {
+        sort.value = true;
         resetArray(prevSortingAlgo);
       }
     });
     async function resetArray(prevSortingAlgo?: string) {
-      sort.value = false;
+      const currSpeed = Math.abs(animationSpeed[0]);
       animationSpeed[0] = 0;
-      await sleep(sortingSpeed.value);
+      console.log(currSpeed);
+      await sleep(Math.max(currSpeed, Math.abs(sortingSpeed.value)));
+      sort.value = false;
       animationSpeed[0] = sortingSpeed.value;
       array.splice(0);
       for (let i = 0; i < arraySize.value; ++i) {
